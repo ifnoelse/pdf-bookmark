@@ -1,0 +1,19 @@
+group 'com.ifnoelse'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
+    compile group: 'org.jodd', name: 'jodd-http', version: '3.8.1'
+}
