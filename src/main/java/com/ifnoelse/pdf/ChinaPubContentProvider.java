@@ -12,9 +12,6 @@ import java.util.List;
  * Created by ifnoelse on 2017/2/25 0025.
  */
 public class ChinaPubContentProvider implements ContentsProvider {
-
-    private static String  searchUrl = "http://search.china-pub.com/s/?key1=%s&type=&pz=%s";
-
     @Override
     public String getContentsByUrl(String url) {
         String contents = null;
