@@ -9,24 +9,13 @@ import java.util.List;
  */
 public class Bookmark {
     private String seq;
-
-    public String getSeq() {
-        return seq;
-    }
-
-    public void setSeq(String seq) {
-        this.seq = seq;
-    }
-
     private int pageIndex = -1;
     private String title;
     private List<Bookmark> subBookMarks = new ArrayList<>();
-
     public Bookmark(String title, int pageIndex) {
         this.pageIndex = pageIndex;
         this.title = title;
     }
-
     public Bookmark(String seq, String title, int pageIndex) {
         this.pageIndex = pageIndex;
         this.title = title;
@@ -35,6 +24,14 @@ public class Bookmark {
 
     public Bookmark(String title) {
         this.title = title;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 
     public int getPageIndex() {
