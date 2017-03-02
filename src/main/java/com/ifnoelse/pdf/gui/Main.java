@@ -84,7 +84,6 @@ public class Main extends Application {
                 }
 
             }
-            System.out.println(observable.getValue());
         });
 
         contentsGenerator.setOnAction(event -> {
