@@ -21,24 +21,28 @@ public class PDFUtil {
     private static Pattern bookmarkPattern = Pattern.compile("^[\t\\s　]*?([0-9.]+)?(.*?)([0-9]+)[\t\\s　]*?$");
     private static String blankRegex = "[\t\\s　]+";
 
-    public static String replaceBlank(String str){
+    public static String replaceBlank(String str) {
         return str.replaceAll(blankRegex, " ").trim();
     }
 
     public static void addBookmark(String bookmarks, String srcFile, String destFile, int pageIndexOffset) {
-        addBookmark(Arrays.asList(bookmarks.split("\n")), srcFile, destFile, pageIndexOffset);
+        if (bookmarks != null && bookmarks.trim().startsWith("http")) {
+            addBookmark(PDFContents.getContentsByUrl(bookmarks), srcFile, destFile, pageIndexOffset);
+        } else {
+            addBookmark(Arrays.asList(bookmarks.split("\n")), srcFile, destFile, pageIndexOffset);
+        }
     }
 
 
-    public static List<Bookmark> generateBookmark(String bookmarks, int pageIndexOffset,int minLens, int maxLnes) {
-        return generateBookmark(Arrays.asList(bookmarks.split("\n")),pageIndexOffset,minLens,maxLnes);
+    public static List<Bookmark> generateBookmark(String bookmarks, int pageIndexOffset, int minLens, int maxLnes) {
+        return generateBookmark(Arrays.asList(bookmarks.split("\n")), pageIndexOffset, minLens, maxLnes);
     }
 
     public static List<Bookmark> generateBookmark(String bookmarks, int pageIndexOffset) {
-        return generateBookmark(Arrays.asList(bookmarks.split("\n")),pageIndexOffset,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        return generateBookmark(Arrays.asList(bookmarks.split("\n")), pageIndexOffset, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public static List<Bookmark> generateBookmark(List<String> bookmarks, int pageIndexOffset,int minLens, int maxLnes) {
+    public static List<Bookmark> generateBookmark(List<String> bookmarks, int pageIndexOffset, int minLens, int maxLnes) {
         List<Bookmark> bookmarkList = new ArrayList<>();
         for (String ln : bookmarks) {
             ln = replaceBlank(ln);
@@ -66,9 +70,8 @@ public class PDFUtil {
     }
 
 
-
     public static void addBookmark(List<String> bookmarks, String srcFile, String destFile, int pageIndexOffset, int minLens, int maxLnes) {
-        addBookmark(generateBookmark(bookmarks,pageIndexOffset,minLens,maxLnes), srcFile, destFile);
+        addBookmark(generateBookmark(bookmarks, pageIndexOffset, minLens, maxLnes), srcFile, destFile);
     }
 
     public static void addBookmark(List<String> bookmarks, String srcFile, String destFile, int pageIndexOffset) {
@@ -93,8 +96,6 @@ public class PDFUtil {
             throw new RuntimeException(e);
         }
     }
-
-
 
 
 }
