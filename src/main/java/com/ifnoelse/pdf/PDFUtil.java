@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Created by ifnoelse on 2017/2/25 0025.
  */
 public class PDFUtil {
-    private static Pattern bookmarkPattern = Pattern.compile("^[\t\\s　]*?([0-9.]+)?(.*?)([0-9]+)[\t\\s　]*?$");
+    private static Pattern bookmarkPattern = Pattern.compile("^[\t\\s　]*?([0-9.]+)?(.*?)/?[\t\\s　]*([0-9]+)[\t\\s　]*?$");
     private static String blankRegex = "[\t\\s　]+";
 
     public static String replaceBlank(String str) {
