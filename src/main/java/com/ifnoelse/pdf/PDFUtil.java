@@ -26,10 +26,13 @@ public class PDFUtil {
     }
 
     public static void addBookmark(String bookmarks, String srcFile, String destFile, int pageIndexOffset) {
-        if (bookmarks != null && bookmarks.trim().startsWith("http")) {
-            addBookmark(PDFContents.getContentsByUrl(bookmarks), srcFile, destFile, pageIndexOffset);
-        } else {
-            addBookmark(Arrays.asList(bookmarks.split("\n")), srcFile, destFile, pageIndexOffset);
+
+        if (bookmarks != null && !bookmarks.isEmpty()) {
+            if (bookmarks.trim().startsWith("http")) {
+                addBookmark(PDFContents.getContentsByUrl(bookmarks), srcFile, destFile, pageIndexOffset);
+            } else {
+                addBookmark(Arrays.asList(bookmarks.split("\n")), srcFile, destFile, pageIndexOffset);
+            }
         }
     }
 
