@@ -2,19 +2,17 @@ package com.ifnoelse.pdf.gui;
 
 import com.ifnoelse.pdf.PDFUtil;
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventType;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * Created by ifnoelse on 2017/3/2 0002.
