@@ -2,11 +2,8 @@ package com.ifnoelse.pdf;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by ifnoelse on 2017/2/25 0025.
