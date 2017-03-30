@@ -1,9 +1,23 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    }
+}
+
 group 'com.ifnoelse'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
+
 
 repositories {
     maven {
