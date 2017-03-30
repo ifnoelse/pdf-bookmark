@@ -1,5 +1,6 @@
 package com.ifnoelse.pdf.gui;
 
+import com.ifnoelse.common.Validate;
 import com.ifnoelse.pdf.PDFUtil;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -74,33 +75,42 @@ public class Main extends Application {
             if (!observable.getValue()) {
                 String offset = pageIndexOffset.getText();
                 if (offset != null && offset.length() > 0 && !offset.matches("[0-9]+")) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("页码偏移量只能为整数");
-                    alert.setTitle("错误");
-                    alert.setHeaderText("偏移量设置错误");
-                    alert.show();
+                    showDialog("错误","偏移量设置错误","页码偏移量只能为整数", Alert.AlertType.ERROR);
                 }
 
             }
         });
 
         contentsGenerator.setOnAction(event -> {
-            String srcFile = filePath.getText().replaceAll("\\\\", "/");
+            String fp = filePath.getText();
+            if(Validate.isEmpty(fp)){
+                showDialog("错误","pdf文件路径为空","pdf文件路径不能为空，请选择pdf文件", Alert.AlertType.ERROR);
+                return;
+            }
+            String srcFile = fp.replaceAll("\\\\", "/");
             String srcFileName = srcFile.substring(srcFile.lastIndexOf("/") + 1);
             String ext = srcFileName.substring(srcFileName.lastIndexOf("."));
             String destFile = srcFile.substring(0, srcFile.lastIndexOf(srcFileName)) + srcFileName.substring(0, srcFileName.lastIndexOf(".")) + "_含目录" + ext;
 
             String offset = pageIndexOffset.getText();
-            PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
+            String content = textArea.getText();
+            if (content != null && !content.isEmpty()) {
+                PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
+                showDialog("通知","添加目录成功！","文件存储在" + destFile,Alert.AlertType.INFORMATION);
+            } else {
+                showDialog("错误","目录内容为空","目录能容不能为空,请填写pdf书籍目录url或者填入目录文本",Alert.AlertType.ERROR);
+            }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-            alert.setContentText("文件存储在" + destFile);
-            alert.setTitle("通知");
-            alert.setHeaderText("添加目录成功！");
-            alert.show();
 
         });
         primaryStage.show();
+    }
+
+    private void showDialog(String title,String header, String content,Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(content);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.show();
     }
 }
