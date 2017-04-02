@@ -1,10 +1,10 @@
 # pdf-bookmark
 ## 下载地址
 1. 下载地址：[pdf-bookmark](https://github.com/ifnoelse/pdf-bookmark/releases)
-2. 执行方式，双击执行或者java -jar pdf-bookmark-`version`-all.jar
+2. 执行方式：双击执行或者java -jar pdf-bookmark-`version`-all.jar
 3. 环境要求：Java 8 +
 ## 本项目用来给pdf自动打上书签方便阅读
-由于互联网上存在很多没有书签的pdf书籍，阅读起来十分不方便，手动添加书签又工作量太大，本项目用来给pdf自动打上书签方便阅读
+由于互联网上存在很多没有书签的pdf书籍，阅读起来十分不方便，手动添加书签工作量太大，本项目用来给pdf书籍自动打上书签方便阅读
 <br />**软件界面**
 <br />![](./img/main_gui.png)
 
