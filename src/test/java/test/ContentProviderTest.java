@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class ContentProviderTest {
     public static void main(String[] args) throws ScriptException, IOException {
-        System.out.println(PDFContents.getContentsByUrl("http://product.china-pub.com/5044676"));
+        System.out.println(PDFContents.getContentsByUrl("http://product.china-pub.com/3684420"));
     }
 
 }
