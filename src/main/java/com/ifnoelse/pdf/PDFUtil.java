@@ -43,6 +43,14 @@ public class PDFUtil {
         return generateBookmark(Arrays.asList(bookmarks.split("\n")), pageIndexOffset, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
+    /**
+     * 为pdf文件添加目录
+     * @param bookmarks 目录内容，每个list的元素为一条目录内容，比如：“1.1 Functional vs. Imperative Data Structures 1”
+     * @param pageIndexOffset
+     * @param minLens
+     * @param maxLnes
+     * @return
+     */
     public static List<Bookmark> generateBookmark(List<String> bookmarks, int pageIndexOffset, int minLens, int maxLnes) {
         List<Bookmark> bookmarkList = new ArrayList<>();
         for (String ln : bookmarks) {
