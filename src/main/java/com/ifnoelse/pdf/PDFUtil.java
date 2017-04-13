@@ -57,6 +57,8 @@ public class PDFUtil {
                     Bookmark pre = bookmarkList.get(bookmarkList.size() - 1);
                     if (pre.getSeq() == null || seq.startsWith(pre.getSeq())) {
                         pre.addSubBookMarkBySeq(new Bookmark(seq, title, pageIndex + pageIndexOffset));
+                    } else {
+                        bookmarkList.add(new Bookmark(seq, title, pageIndex + pageIndexOffset));
                     }
                 } else {
                     bookmarkList.add(new Bookmark(title, pageIndex + pageIndexOffset));
