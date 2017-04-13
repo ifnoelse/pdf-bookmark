@@ -46,10 +46,10 @@ public class PDFUtil {
     /**
      * 为pdf文件添加目录
      * @param bookmarks 目录内容，每个list的元素为一条目录内容，比如：“1.1 Functional vs. Imperative Data Structures 1”
-     * @param pageIndexOffset
-     * @param minLens
-     * @param maxLnes
-     * @return
+     * @param pageIndexOffset pdf文件真是页码与目录页码之间的偏移量
+     * @param minLens 合法的目录条目最小长度
+     * @param maxLnes 合法的目录条目最大长度
+     * @return 返回报个书签内容的list集合
      */
     public static List<Bookmark> generateBookmark(List<String> bookmarks, int pageIndexOffset, int minLens, int maxLnes) {
         List<Bookmark> bookmarkList = new ArrayList<>();
