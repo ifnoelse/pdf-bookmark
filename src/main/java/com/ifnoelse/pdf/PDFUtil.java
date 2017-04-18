@@ -75,7 +75,6 @@ public class PDFUtil {
             } else {
                 bookmarkList.add(new Bookmark(replaceBlank(ln)));
             }
-
         }
         return bookmarkList;
     }
