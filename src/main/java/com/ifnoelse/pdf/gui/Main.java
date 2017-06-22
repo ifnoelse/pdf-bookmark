@@ -42,6 +42,7 @@ public class Main extends Application {
         TextField filePath = new TextField();
 
         filePath.setEditable(false);
+        filePath.setPromptText("请选择PDF文件");
 
         BorderPane topPane = new BorderPane();
         topPane.setCenter(filePath);
