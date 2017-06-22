@@ -2,16 +2,21 @@ package com.ifnoelse.pdf.gui;
 
 import com.ifnoelse.pdf.PDFUtil;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 
 /**
@@ -37,6 +42,7 @@ public class Main extends Application {
         TextField filePath = new TextField();
 
         filePath.setEditable(false);
+
         BorderPane topPane = new BorderPane();
         topPane.setCenter(filePath);
 
@@ -49,14 +55,31 @@ public class Main extends Application {
         pageIndexOffset.setPrefWidth(100);
 
 
+
+
         TextArea textArea = new TextArea();
+
+
         textArea.setPromptText("请在此填入目录内容");
+
+        textArea.setOnDragEntered(e->{
+            Dragboard dragboard = e.getDragboard();
+            File file = dragboard.getFiles().get(0); //获取拖入的文件
+            String fileName = file.getName();
+            if(fileName.matches("[\\s\\S]+.[pP][dD][fF]$")){
+                filePath.setText(file.getPath());
+            }
+        });
+
+
         vBox.setCenter(textArea);
+
+
+
 
         vBox.setBottom(bottomPane);
         Scene scene = new Scene(vBox, 600, 400);
         primaryStage.setScene(scene);
-
 
         fileSelectorBtn.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
