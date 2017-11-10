@@ -56,26 +56,22 @@ public class Main extends Application {
         pageIndexOffset.setPrefWidth(100);
 
 
-
-
         TextArea textArea = new TextArea();
 
 
         textArea.setPromptText("请在此填入目录内容");
 
-        textArea.setOnDragEntered(e->{
+        textArea.setOnDragEntered(e -> {
             Dragboard dragboard = e.getDragboard();
             File file = dragboard.getFiles().get(0); //获取拖入的文件
             String fileName = file.getName();
-            if(fileName.matches("[\\s\\S]+.[pP][dD][fF]$")){
+            if (fileName.matches("[\\s\\S]+.[pP][dD][fF]$")) {
                 filePath.setText(file.getPath());
             }
         });
 
 
         vBox.setCenter(textArea);
-
-
 
 
         vBox.setBottom(bottomPane);
@@ -118,7 +114,13 @@ public class Main extends Application {
             String offset = pageIndexOffset.getText();
             String content = textArea.getText();
             if (content != null && !content.isEmpty()) {
-                PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
+                try {
+                    PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
+                } catch (Exception e) {
+                    showDialog("错误","添加目录错误",e.toString(),Alert.AlertType.INFORMATION);
+                    e.printStackTrace();
+                    return;
+                }
                 showDialog("通知", "添加目录成功！", "文件存储在" + destFile, Alert.AlertType.INFORMATION);
             } else {
                 showDialog("错误", "目录内容为空", "目录能容不能为空,请填写pdf书籍目录url或者填入目录文本", Alert.AlertType.ERROR);
