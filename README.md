@@ -21,7 +21,7 @@
 #### 3.1 在pdf-bookmark目录编辑框填入目录内容（方法一）
 #### 3.2 者包含此书目录内容的页面url（url方式目前只支持china-pub）（方法二）
 #### 3.3 示例
-<br />我们可以通过互联网书店找到我们要处理的pdf书籍的目录内容，以[china-pub](http://www.china-pub.com/)为例，我们可以搜索到《快学scala》的详情页`http://product.china-pub.com/3684420`，以下为目录部分的截图
+我们可以通过互联网书店找到我们要处理的pdf书籍的目录内容，以[china-pub](http://www.china-pub.com/)为例，我们可以搜索到《快学scala》的详情页`http://product.china-pub.com/3684420`，以下为目录部分的截图
 ![](./img/scala_exp_cp.png)
 <br />以上为china-pub中书籍详情页目录部分，可以点击**↓展开全部内容**然后将完整目录复制到pdf-bookmark目录编辑框中，或者直接将此页面url填入目录编辑框
 <br />**填入目录内容示例**
