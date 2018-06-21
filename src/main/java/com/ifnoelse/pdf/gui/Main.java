@@ -71,10 +71,7 @@ public class Main extends Application {
         });
 
 
-        vBox.setRight(textArea);
-        vBox.setLeft(new TextArea());
-
-
+        vBox.setCenter(textArea);
 
 
         vBox.setBottom(bottomPane);
@@ -88,6 +85,7 @@ public class Main extends Application {
             if (file != null) {
                 filePath.setText(file.getPath());
             }
+
 
         });
 
