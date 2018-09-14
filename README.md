@@ -19,7 +19,7 @@
 ### 3. 设置目录内容 ###
 目前设置目录内容的方法有以下两种
 #### 3.1 在pdf-bookmark目录编辑框填入目录内容（方法一）
-#### 3.2 者包含此书目录内容的页面url（url方式目前只支持china-pub）（方法二）
+#### 3.2 或者包含此书目录内容的页面url（url方式目前只支持china-pub）（方法二）
 #### 3.3 示例
 我们可以通过互联网书店找到我们要处理的pdf书籍的目录内容，以[china-pub](http://www.china-pub.com/)为例，我们可以搜索到《快学scala》的详情页`http://product.china-pub.com/3684420`，以下为目录部分的截图
 ![](./img/scala_exp_cp.png)
