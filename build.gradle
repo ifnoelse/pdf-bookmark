@@ -11,12 +11,14 @@ group 'com.ifnoelse'
 version '1.0.3'
 
 apply plugin: 'java'
+apply plugin: 'signing'
+apply plugin: 'maven-publish'
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 mainClassName = "com.ifnoelse.pdf.gui.Main"
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
 
@@ -26,7 +28,57 @@ repositories {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
 }
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
 
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = 'pdf-bookmark'
+                description = 'pdf-bookmark'
+                url = 'https://github.com/ifnoelse/pdf-bookmark'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'ifnoelse'
+                        name = 'ifnoelse'
+                        email = 'ifnoelse@qq.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/ifnoelse/pdf-bookmark.git'
+                    developerConnection = 'scm:git:https://github.com/ifnoelse/pdf-bookmark.git'
+                    url = 'https://github.com/ifnoelse/pdf-bookmark'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = './maven'
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
