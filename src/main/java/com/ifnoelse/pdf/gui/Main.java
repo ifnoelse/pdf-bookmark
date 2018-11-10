@@ -33,7 +33,6 @@ public class Main extends Application {
         BorderPane bottomPane = new BorderPane();
         Button contentsGenerator = new Button("生成目录");
         Button getContents = new Button("获取目录");
-//        bottomPane.setCenter(getContents);
 
         getContents.setDisable(true);
         HBox h = new HBox(20, getContents, contentsGenerator);
