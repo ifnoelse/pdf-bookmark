@@ -1,4 +1,9 @@
 # pdf-bookmark
+
+## 使用说明
+
+![](./img/intro.gif)
+
 ## 下载地址
 1. 下载地址：[pdf-bookmark](https://github.com/ifnoelse/pdf-bookmark/releases)
 2. 执行方式：双击执行或者java -jar pdf-bookmark-`version`-all.jar
