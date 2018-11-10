@@ -1,22 +1,20 @@
 package com.ifnoelse.pdf.gui;
 
+import com.ifnoelse.pdf.PDFContents;
 import com.ifnoelse.pdf.PDFUtil;
 import javafx.application.Application;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 
 /**
@@ -34,7 +32,16 @@ public class Main extends Application {
 
         BorderPane bottomPane = new BorderPane();
         Button contentsGenerator = new Button("生成目录");
-        bottomPane.setCenter(contentsGenerator);
+        Button getContents = new Button("获取目录");
+//        bottomPane.setCenter(getContents);
+
+        getContents.setDisable(true);
+        HBox h = new HBox(20, getContents, contentsGenerator);
+
+        h.setAlignment(Pos.CENTER);
+
+        bottomPane.setCenter(h);
+
         Button fileSelectorBtn = new Button("选择文件");
 
 
@@ -71,6 +78,14 @@ public class Main extends Application {
         });
 
 
+        textArea.textProperty().addListener(event -> {
+            if (textArea.getText().trim().startsWith("http")) {
+                getContents.setDisable(false);
+            } else {
+                getContents.setDisable(true);
+            }
+        });
+
         vBox.setCenter(textArea);
 
 
@@ -100,6 +115,11 @@ public class Main extends Application {
             }
         });
 
+        getContents.setOnAction(event -> {
+            String contents = PDFContents.getContentsByUrl(textArea.getText());
+            textArea.setText(contents);
+        });
+
         contentsGenerator.setOnAction(event -> {
             String fp = filePath.getText();
             if (fp == null || fp.isEmpty()) {
@@ -117,8 +137,7 @@ public class Main extends Application {
                 try {
                     PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
                 } catch (Exception e) {
-                    showDialog("错误","添加目录错误",e.toString(),Alert.AlertType.INFORMATION);
-                    e.printStackTrace();
+                    showDialog("错误", "添加目录错误", e.toString(), Alert.AlertType.INFORMATION);
                     return;
                 }
                 showDialog("通知", "添加目录成功！", "文件存储在" + destFile, Alert.AlertType.INFORMATION);

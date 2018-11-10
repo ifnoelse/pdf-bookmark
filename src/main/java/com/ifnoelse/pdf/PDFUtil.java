@@ -69,7 +69,7 @@ public class PDFUtil {
                         bookmarkList.add(new Bookmark(seq, title, pageIndex + pageIndexOffset));
                     }
                 } else {
-                    bookmarkList.add(new Bookmark(title, pageIndex + pageIndexOffset));
+                    bookmarkList.add(new Bookmark(seq,title, pageIndex + pageIndexOffset));
                 }
 
             } else {
@@ -93,7 +93,7 @@ public class PDFUtil {
     }
 
     public static void addBookmark(List<Bookmark> bookmarks, String srcFile, String destFile) {
-        addOutlines(bookmarks.stream().map(e -> e.outlines()).collect(Collectors.toList()), srcFile, destFile);
+        addOutlines(bookmarks.stream().map(Bookmark::outlines).collect(Collectors.toList()), srcFile, destFile);
     }
 
     private static void addOutlines(List<HashMap<String, Object>> outlines, String srcFile, String destFile) {
