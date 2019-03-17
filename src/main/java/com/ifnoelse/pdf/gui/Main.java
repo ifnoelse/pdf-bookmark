@@ -137,7 +137,6 @@ public class Main extends Application {
                 try {
                     PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
                 } catch (Exception e) {
-                    e.printStackTrace();
                     String errInfo = e.toString();
                     if (e.getCause().getClass() == BadPasswordException.class) {
                         errInfo = "PDF已加密，无法完成修改";
