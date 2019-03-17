@@ -8,7 +8,7 @@ buildscript {
 }
 
 group 'com.ifnoelse'
-version '1.0.4'
+version '1.0.5'
 
 apply plugin: 'java'
 apply plugin: 'signing'
@@ -82,6 +82,7 @@ signing {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
-    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
-    compile group: 'org.jodd', name: 'jodd-http', version: '3.8.1'
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
+    compile group: 'org.jodd', name: 'jodd-http', version: '5.0.10'
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.61'
 }
