@@ -2,6 +2,7 @@ package com.ifnoelse.pdf.gui;
 
 import com.ifnoelse.pdf.PDFContents;
 import com.ifnoelse.pdf.PDFUtil;
+import com.itextpdf.text.exceptions.BadPasswordException;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -136,7 +137,12 @@ public class Main extends Application {
                 try {
                     PDFUtil.addBookmark(textArea.getText(), srcFile, destFile, Integer.parseInt(offset != null && !offset.isEmpty() ? offset : "0"));
                 } catch (Exception e) {
-                    showDialog("错误", "添加目录错误", e.toString(), Alert.AlertType.INFORMATION);
+                    e.printStackTrace();
+                    String errInfo = e.toString();
+                    if (e.getCause().getClass() == BadPasswordException.class) {
+                        errInfo = "PDF已加密，无法完成修改";
+                    }
+                    showDialog("错误", "添加目录错误", errInfo, Alert.AlertType.INFORMATION);
                     return;
                 }
                 showDialog("通知", "添加目录成功！", "文件存储在" + destFile, Alert.AlertType.INFORMATION);
