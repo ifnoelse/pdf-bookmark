@@ -4,6 +4,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,10 +46,11 @@ public class PDFUtil {
 
     /**
      * 为pdf文件添加目录
-     * @param bookmarks 目录内容，每个list的元素为一条目录内容，比如：“1.1 Functional vs. Imperative Data Structures 1”
+     *
+     * @param bookmarks       目录内容，每个list的元素为一条目录内容，比如：“1.1 Functional vs. Imperative Data Structures 1”
      * @param pageIndexOffset pdf文件真是页码与目录页码之间的偏移量
-     * @param minLens 合法的目录条目最小长度
-     * @param maxLnes 合法的目录条目最大长度
+     * @param minLens         合法的目录条目最小长度
+     * @param maxLnes         合法的目录条目最大长度
      * @return 返回报个书签内容的list集合
      */
     public static List<Bookmark> generateBookmark(List<String> bookmarks, int pageIndexOffset, int minLens, int maxLnes) {
@@ -69,7 +71,7 @@ public class PDFUtil {
                         bookmarkList.add(new Bookmark(seq, title, pageIndex + pageIndexOffset));
                     }
                 } else {
-                    bookmarkList.add(new Bookmark(seq,title, pageIndex + pageIndexOffset));
+                    bookmarkList.add(new Bookmark(seq, title, pageIndex + pageIndexOffset));
                 }
 
             } else {
@@ -98,7 +100,14 @@ public class PDFUtil {
 
     private static void addOutlines(List<HashMap<String, Object>> outlines, String srcFile, String destFile) {
         try {
-            PdfReader reader = new PdfReader(srcFile);
+            class MyPdfReader extends PdfReader {
+                public MyPdfReader(String fileName) throws IOException {
+                    super(fileName);
+                    unethicalreading = true;
+                    encrypted = false;
+                }
+            }
+            PdfReader reader = new MyPdfReader(srcFile);
             PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(destFile));
             stamper.setOutlines(outlines);
             stamper.close();
