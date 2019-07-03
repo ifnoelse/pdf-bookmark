@@ -15,12 +15,12 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) throws IOException {
 
-        //获取书籍的目录信息
+        //Get catalog information for books
         String contents = PDFContents.getContentsByUrl("http://product.china-pub.com/223565");
 
 
-        //为书籍添加目录
-        PDFUtil.addBookmark(PDFUtil.generateBookmark(contents, 14), "需要添加书签的pdf路径", "添加书签之后的pdf输出路径");
+        //Add a table of contents to a book
+        PDFUtil.addBookmark(PDFUtil.generateBookmark(contents, 14), "Pdf path to add bookmarks", "Pdf output path after adding bookmark");
 
 
     }
