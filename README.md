@@ -1,5 +1,5 @@
 # pdf-bookmark
-[English](./README-EN)
+[English](./README-EN.md)
 
 ## 示例
 
