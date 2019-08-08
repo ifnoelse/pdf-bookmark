@@ -1,7 +1,7 @@
-# pdf-bookmark - ٍEnglish
+# pdf-bookmark - English
 * Translated by Amin Yahyaabadi
 
-##example
+## example
 
 ![](./img/intro.gif)
 
