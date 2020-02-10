@@ -8,7 +8,7 @@
 ## download link
 1. Download address: [pdf-bookmark] (https://github.com/ifnoelse/pdf-bookmark/releases)
 2. Execution mode: double-click execution or java -jar pdf-bookmark-`version`-all.jar
-3. Environmental requirements: Java 8
+3. Environmental requirements: Oracle JDK 8
 ## Introduction
 Due to the existence of many pdf books without bookmarks on the Internet, it is very inconvenient to read. Manually adding bookmarks is too much work. This project is used to automatically bookmark pdf books for easy reading.
 <br />**Software interface**
