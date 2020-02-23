@@ -32,8 +32,8 @@ public class Main extends Application {
         primaryStage.setTitle("pdf bookmark");
 
         BorderPane bottomPane = new BorderPane();
-        Button contentsGenerator = new Button("Build directory");
-        Button getContents = new Button("Get directory");
+        Button contentsGenerator = new Button("生成目录");
+        Button getContents = new Button("获取目录");
 
         getContents.setDisable(true);
         HBox h = new HBox(20, getContents, contentsGenerator);
@@ -42,14 +42,14 @@ public class Main extends Application {
 
         bottomPane.setCenter(h);
 
-        Button fileSelectorBtn = new Button("Select the file");
+        Button fileSelectorBtn = new Button("选择文件");
 
 
         BorderPane vBox = new BorderPane();
         TextField filePath = new TextField();
 
         filePath.setEditable(false);
-        filePath.setPromptText("Please select a PDF file");
+        filePath.setPromptText("请选择PDF文件");
 
         BorderPane topPane = new BorderPane();
         topPane.setCenter(filePath);
@@ -59,18 +59,18 @@ public class Main extends Application {
         topPane.setRight(new HBox(pageIndexOffset, fileSelectorBtn));
         vBox.setTop(topPane);
 
-        pageIndexOffset.setPromptText("Page offset");
+        pageIndexOffset.setPromptText("页码偏移量");
         pageIndexOffset.setPrefWidth(100);
 
 
         TextArea textArea = new TextArea();
 
 
-        textArea.setPromptText("Please fill in the contents of the directory here.");
+        textArea.setPromptText("请在此填入目录内容");
 
         textArea.setOnDragEntered(e -> {
             Dragboard dragboard = e.getDragboard();
-            File file = dragboard.getFiles().get(0); // Get the dragged file
+            File file = dragboard.getFiles().get(0); //获取拖入的文件
             String fileName = file.getName();
             if (fileName.matches("[\\s\\S]+.[pP][dD][fF]$")) {
                 filePath.setText(file.getPath());
@@ -109,7 +109,7 @@ public class Main extends Application {
             if (!observable.getValue()) {
                 String offset = pageIndexOffset.getText();
                 if (offset != null && offset.length() > 0 && !offset.matches("[0-9]+")) {
-                    showDialog("error", "Offset setting error", "Page offset can only be an integer", Alert.AlertType.ERROR);
+                    showDialog("错误", "偏移量设置错误", "页码偏移量只能为整数", Alert.AlertType.ERROR);
                 }
 
             }
@@ -123,13 +123,13 @@ public class Main extends Application {
         contentsGenerator.setOnAction(event -> {
             String fp = filePath.getText();
             if (fp == null || fp.isEmpty()) {
-                showDialog("error", "The pdf file path is empty", "Pdf file path cannot be empty，Please select a pdf file", Alert.AlertType.ERROR);
+                showDialog("错误", "pdf文件路径为空", "pdf文件路径不能为空，请选择pdf文件", Alert.AlertType.ERROR);
                 return;
             }
             String srcFile = fp.replaceAll("\\\\", "/");
             String srcFileName = srcFile.substring(srcFile.lastIndexOf("/") + 1);
             String ext = srcFileName.substring(srcFileName.lastIndexOf("."));
-            String destFile = srcFile.substring(0, srcFile.lastIndexOf(srcFileName)) + srcFileName.substring(0, srcFileName.lastIndexOf(".")) + "_including directory" + ext;
+            String destFile = srcFile.substring(0, srcFile.lastIndexOf(srcFileName)) + srcFileName.substring(0, srcFileName.lastIndexOf(".")) + "_含目录" + ext;
 
             String offset = pageIndexOffset.getText();
             String content = textArea.getText();
@@ -139,14 +139,14 @@ public class Main extends Application {
                 } catch (Exception e) {
                     String errInfo = e.toString();
                     if (e.getCause().getClass() == BadPasswordException.class) {
-                        errInfo = "PDF is encrypted and cannot be modified";
+                        errInfo = "PDF已加密，无法完成修改";
                     }
-                    showDialog("error", "Add directory error", errInfo, Alert.AlertType.INFORMATION);
+                    showDialog("错误", "添加目录错误", errInfo, Alert.AlertType.INFORMATION);
                     return;
                 }
-                showDialog("Notice", "Add directory successfully！", "File is stored in" + destFile, Alert.AlertType.INFORMATION);
+                showDialog("通知", "添加目录成功！", "文件存储在" + destFile, Alert.AlertType.INFORMATION);
             } else {
-                showDialog("error", "Directory content is empty", "The directory can not be empty, please fill in the pdf book directory url or fill in the directory text", Alert.AlertType.ERROR);
+                showDialog("错误", "目录内容为空", "目录能容不能为空,请填写pdf书籍目录url或者填入目录文本", Alert.AlertType.ERROR);
             }
 
 
