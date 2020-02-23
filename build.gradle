@@ -1,87 +1,38 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:5.1.0"
-    }
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
 }
-
 group 'com.ifnoelse'
-version '1.0.6'
-
-apply plugin: 'java'
-apply plugin: 'signing'
-apply plugin: 'maven-publish'
-apply plugin: 'application'
-apply plugin: "com.github.johnrengelman.shadow"
+version '1.0.7'
 
 mainClassName = "com.ifnoelse.pdf.gui.Main"
 
 [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-sourceCompatibility = 1.8
-
+sourceCompatibility = 11
 
 repositories {
     maven {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
 }
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls' ]
 }
 
-task javadocJar(type: Jar) {
-    from javadoc
-    classifier = 'javadoc'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            pom {
-                name = 'pdf-bookmark'
-                description = 'pdf-bookmark'
-                url = 'https://github.com/ifnoelse/pdf-bookmark'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'ifnoelse'
-                        name = 'ifnoelse'
-                        email = 'ifnoelse@qq.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:https://github.com/ifnoelse/pdf-bookmark.git'
-                    developerConnection = 'scm:git:https://github.com/ifnoelse/pdf-bookmark.git'
-                    url = 'https://github.com/ifnoelse/pdf-bookmark'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = './maven'
-        }
+jlink {
+    launcher {
+        name = 'pdf-bookmark'
     }
 }
 
-signing {
-    sign publishing.publications.mavenJava
-}
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
-    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.61'
+//    compile group: 'org.bouncycastle', name: 'bcprov-jdk16', version: '1.46'
 }
