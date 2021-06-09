@@ -1,5 +1,4 @@
 # pdf-bookmark - English
-* Translated by Amin Yahyaabadi
 
 ## example
 
@@ -9,7 +8,7 @@
 1. Download address: [pdf-bookmark] (https://github.com/ifnoelse/pdf-bookmark/releases)
 2. Execution mode: execution `bin/pdf-bookmark`
 
->If pdf-bookmark not work，please build it by yourself
+> If the included pdf-bookmark binary does not work，please build it by yourself using the following commands:
 ````
 git clone https://github.com/ifnoelse/pdf-bookmark.git
 cd pdf-bookmark
